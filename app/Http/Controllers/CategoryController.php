@@ -22,7 +22,8 @@ public function __construct(CategoryService $categoryService) {
     public function index()
     {
         try {
-            return $this->categoryService->all();
+            $categories = $this->categoryService->all();
+            return view('categories.index', compact('categories'));
         } catch (\Throwable $e) {
             return $e;
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskRequests\TaskStoreRequest;
 use App\Models\Task;
 use App\Repositories\Interfaces\TaskRepositoryInterface;
 use Illuminate\Http\Request;
@@ -19,7 +20,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return "Por programar";
+        $tasks = Task::where('id', auth()->user()->id)->get();
+        
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -33,12 +36,12 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TaskStoreRequest $request)
     {
-        $data = $request->all();
-       // $task = Task::create($data);
+        $data = $request->validated();
+        $task = Task::create($data);
 
-        return response()->json($data, 201);
+        return response()->json($task, 201);
     }
 
     /**
