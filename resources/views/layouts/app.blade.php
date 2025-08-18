@@ -48,8 +48,8 @@
                     </a>
                 </li>
                 <li>
-
                     <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-600 transition">
+                        <i class="fa fa-bars"></i>
                         <span class="text-gray-700 font-medium">Email</span>
                     </a>
                 </li>

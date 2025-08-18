@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Categories\CategoryStoreRequest;
 use App\Models\Category;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Services\CategoryService;
@@ -34,17 +35,15 @@ public function __construct(CategoryService $categoryService) {
      */
     public function create()
     {
-        return view('category.create');
+        return view('categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryStoreRequest $request)
     {
-        $data = $request->validate([
-            'user_id' => 'required',
-            'name' => 'required']);
+        $data = $request->validated();
         $category = Category::create($data);
         return response()->json($category, 201);
     }
@@ -67,7 +66,7 @@ public function __construct(CategoryService $categoryService) {
             return back()->json(['message' => 'Não encontrado', 404]);
         endif;
 
-        return view('category.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -86,6 +85,9 @@ public function __construct(CategoryService $categoryService) {
     public function destroy(string $id)
     {
         $category = Category::find($id);
-        return $category->delete();
+        if (!$category->delete()):
+            return "Erro ao deletar";
+        endif;
+        return response()->json("Categoria deletada", 200);;
     }
 }
