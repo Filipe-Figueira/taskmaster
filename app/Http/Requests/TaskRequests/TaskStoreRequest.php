@@ -23,7 +23,8 @@ class TaskStoreRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'title' => 'required',
+            'category_id' => 'required',
+            'title' => ['required', 'min:3'],
             'description' => 'nullable',
             'priority' => 'required|in:Baixa,Média,Alta',
             'due_date' => 'required|date|after_or_equal:tomorrow'

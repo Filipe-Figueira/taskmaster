@@ -9,3 +9,130 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+body {
+    @apply bg-slate-950/90 text-white/90
+    min-h-screen flex items-center justify-center py-6 p-8;
+}
+
+.navbar {
+    @apply w-60 flex flex-col gap-12 justify-between p-4 overflow-hidden;
+}
+
+.navbar ul li a {
+    @apply flex items-center gap-3 p-3 rounded-xl hover:bg-gray-600 transition;
+}
+.navbar ul li a i {
+    @apply  text-indigo-200 text-lg;
+}
+.navbar ul li a span {
+    @apply font-medium;
+}
+
+
+.h1 {
+    @apply text-2xl font-bold mb-6 flex items-center gap-2 uppercase;
+}
+.btn {
+    @apply cursor-pointer font-normal text-center rounded-sm mx-2 my-3 px-5 py-2 transition duration-200 ease-in-out;
+}
+.btn-icon {
+    @apply flex gap-2 items-center justify-center text-sm;
+}
+.btn-rounded {
+    @apply rounded-full;
+}
+.btn-primary {
+    @apply cursor-pointer bg-indigo-700 text-white ;
+}
+
+.btn-primary:hover {
+    @apply bg-indigo-500;
+}
+.btn-danger {
+    @apply cursor-pointer bg-red-500 text-white ;
+}
+
+.btn-danger:hover {
+    @apply bg-red-600;
+}
+.btn-info {
+    @apply bg-blue-600 text-white ;
+}
+
+.btn-info:hover {
+    @apply bg-blue-500;
+}
+.btn-success {
+    @apply bg-green-600 text-white ;
+}
+
+.btn-success:hover {
+    @apply bg-green-500;
+}
+.btn-inverse-primary {
+    @apply bg-indigo-300 text-indigo-950;
+}
+
+.btn-inverse-primary:hover {
+    @apply bg-indigo-500 text-white;
+}
+.btn-inverse-primary {
+    @apply bg-indigo-300 text-indigo-950;
+}
+
+.btn-inverse-danger:hover {
+    @apply bg-red-500 text-white;
+}
+.btn-inverse-danger {
+    @apply bg-red-300 text-red-950;
+}
+
+.btn-inverse-info:hover {
+    @apply bg-blue-500 text-white;
+}
+.btn-inverse-info {
+    @apply bg-blue-300 text-indigo-950;
+}
+
+.btn-inverse-info:hover {
+    @apply bg-blue-500 text-white;
+}
+.btn-inverse-success {
+    @apply bg-green-300 text-indigo-950;
+}
+
+.btn-inverse-success:hover {
+    @apply bg-green-500 text-white;
+}
+
+.bordered {
+    @apply rounded-2xl ring-2 ring-slate-700;
+}
+.form {
+    @apply p-6 flex flex-col gap-3 rounded-2xl border-2 border-slate-700;
+}
+.form-label {
+    @apply block indent-2 mb-3 text-sm font-medium;
+}
+.form-input {
+    @apply ps-4 p-2.5;
+}
+.form-textarea {
+    @apply resize-none p-2.5;
+}
+
+.form-select {
+    @apply p-2.5;
+}
+
+.form-date {
+    @apply ps-4 p-1.5;
+}
+
+.form-input, .form-textarea, .form-select, .form-date {
+    @apply block w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus, .form-date:focus {
+    @apply outline-none ring-3 ring-indigo-400 border-indigo-800;
+}

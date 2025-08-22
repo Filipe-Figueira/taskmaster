@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title', "Tasks")
 @section('content')
-    <h2 class="text-xl font-semibold text-gray-700 mb-6 flex items-center gap-2">
-        Adicionar uma nova Task
-    </h2>
+    <h1 class="h1">
+        Crie uma nova Task
+    </h1>
 
     @if ($errors->any())
         <div class="bg-red-100 text-red-600 p-3 rounded-lg mb-4">
@@ -15,52 +15,60 @@
         </div>
     @endif
 
-    <form action="{{ route('tasks.store') }}" method="post" class="space-y-4">
+    <form action="{{ route('tasks.store') }}" method="post" class="form">
         @csrf
-        <input type="hidden" name="user_id" value="{{ auth()->user()->id ?? 1 }}">
-        <input type="hidden" name="category_id" value="">
+        <input type="hidden" name="user_id" value="{{ $userId }}">
+        <label for="category" class="form-label">Categoria</label>
+        <select name="category_id" id="category" class="form-select">
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->id }}</option>
+            @endforeach
+
+        </select>
 
         <div>
-            <label for="title" class="block text-sm font-medium text-gray-600">Título</label>
+            <label for="title" class="form-label">Título</label>
             <input type="text" name="title" id="title"
-                class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-violet-400 focus:outline-none">
+                class="form-input">
         </div>
 
         <div>
-            <label for="description" class="block text-sm font-medium text-gray-600">Descrição</label>
-            <textarea name="description" id="description" rows="4"
-                class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-violet-400 focus:outline-none resize-none"></textarea>
+            <label for="description" class="form-label">Descrição</label>
+            <textarea name="description" id="description" rows="4" placeholder="Descreva sua task..."
+                class="form-textarea">{{ old('description') }}</textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
             <div>
-                <label for="priority" class="block text-sm font-medium text-gray-600">Prioridade</label>
+                <label for="priority" class="form-label">Prioridade</label>
                 <select name="priority" id="priority"
-                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-violet-400 focus:outline-none">
+                    class="form-select">
                     <option value="Baixa">Baixa</option>
                     <option value="Média">Média</option>
                     <option value="Alta">Alta</option>
                 </select>
             </div>
             <div>
-                <label for="status" class="block text-sm font-medium text-gray-600">Status</label>
+                <label for="status" class="form-label">Status</label>
                 <select name="status" id="status"
-                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-violet-400 focus:outline-none">
-                    <option value="Pendente">Pendente</option>
-                    <option value="Concluída">Concluída</option>
-                    <option value="Atrasada">Atrasada</option>
-                    <option value="Cancelada">Cancelada</option>
+                    class="form-select">
+                    <div>
+                        <option value="Pendente">Pendente</option>
+                        <option value="Concluída">Concluída</option>
+                        <option value="Atrasada">Atrasada</option>
+                        <option value="Cancelada">Cancelada</option>
+                    </div>
                 </select>
             </div>
         </div>
 
         <div>
-            <label for="due_date" class="block text-sm font-medium text-gray-600">Prazo para finalizar</label>
+            <label for="due_date" class="form-label">Prazo para finalizar</label>
             <input type="date" name="due_date" id="due_date"
-                class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-violet-400 focus:outline-none">
+                class="form-date">
         </div>
 
         <button type="submit"
-            class="bg-violet-600 text-white px-5 py-2 rounded-lg hover:bg-violet-700 transition flex items-center gap-2">Salvar</button>
+            class="btn btn-primary btn-icon">Salvar</button>
     </form>
 @endsection

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequests\TaskStoreRequest;
+use App\Models\Category;
 use App\Models\Task;
 use App\Repositories\Interfaces\TaskRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -20,7 +22,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::where('id', auth()->user()->id)->get();
+        $tasks = Task::where('user_id', Auth::user()->id)->get();
         
         return view('tasks.index', compact('tasks'));
     }
@@ -30,7 +32,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.create');
+        $userId = Auth::user()->id;
+        $categories = Category::all();
+        return view('tasks.create', compact('categories', 'userId'));
     }
 
     /**

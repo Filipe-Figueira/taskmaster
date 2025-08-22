@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Categories\CategoryStoreRequest;
 use App\Models\Category;
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
-
-use function Pest\Laravel\json;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -35,7 +33,11 @@ public function __construct(CategoryService $categoryService) {
      */
     public function create()
     {
-        return view('categories.create');
+        if ($userId = Auth::user()->id):
+            return view('categories.create', compact('userId'));
+        endif;
+
+        return back();
     }
 
     /**

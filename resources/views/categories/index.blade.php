@@ -1,24 +1,41 @@
 @extends('layouts.app')
 @section('title', 'Categories')
 @section('content')
-    <div class="flex flex-col ">
-        <h1 class="text-xl font-semibold text-gray-700 mb-6 flex items-center gap-2">Categorias</h1>
-
-        <ul>
+<div class="">
+    <h1 class="h1">Categorias</h1>
+    <div class="block mb-6"><a href="{{ route('categories.create') }}" class="btn btn-primary">Nova Categoria</a></div>
+    <table class="table-auto rounded-2xl ring ring-white/15">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach ($categories as $category)
-            <li class="text-white grid grid-cols-3">
-                <a href="{{ route('categories.show', ['category' => $category->id]) }}">{{ $category->name }}</a>
-                <a href="{{ route('categories.edit', ['category' => $category->id]) }}" class="w-20 text-white bg-indigo-500 py-2 text-center rounded-full mb-3">Editar</a>
-                <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post">
-                    @method('DELETE')
-                    @csrf
-                      <button type="submit" class="w-20 text-white bg-red-500 py-2 text-center rounded-full mb-3">Excluír</button>
-                </form>
+                <tr>
+                    <td class="p-2">
+                        <a href="{{ route('categories.show', ['category' => $category->id]) }}">{{ $category->name }}</a>
+                    </td>
 
-            </li>
+                    <td>
+                        <a href="{{ route('categories.edit', ['category' => $category->id]) }}"
+                            class="btn btn-inverse-danger btn-icon btn-sm">Editar<i class="fa fa-pencil"></i></a>
+                    </td>
 
+                    <td>
+                        <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit"
+                                class="btn btn-danger">Excluír</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
-        </ul>
-        <a href="{{ route('categories.create') }}" class="text-white bg-indigo-700 py-2 text-center rounded-full">Nova Categoria</a>
-    </div>
+        </tbody>
+    </table>
+
+</div>
 @endsection
