@@ -14,39 +14,48 @@ body {
     min-h-screen flex items-center justify-center py-6 p-8;
 }
 
+.h1 {
+    @apply text-2xl font-bold mb-6 flex items-center gap-2 uppercase;
+}
+.h2 {
+    @apply text-xl font-medium mb-4 text-center uppercase;
+}
 .navbar {
-    @apply w-60 flex flex-col gap-12 justify-between p-4 overflow-hidden;
+    @apply w-35 flex flex-col bg-gray-800/90 rounded-2xl gap-12 justify-between p-4 overflow-hidden;
 }
 
 .navbar ul li a {
-    @apply flex items-center gap-3 p-3 rounded-xl hover:bg-gray-600 transition;
+    @apply flex items-center flex-col justify-center gap-3 p-2 text-sm rounded-xl transition;
+}
+
+.navbar ul li a:hover {
+    @apply text-indigo-400 bg-gray-600;
 }
 .navbar ul li a i {
-    @apply  text-indigo-200 text-lg;
+    @apply  text-inherit text-lg;
 }
 .navbar ul li a span {
     @apply font-medium;
 }
 
-
-.h1 {
-    @apply text-2xl font-bold mb-6 flex items-center gap-2 uppercase;
-}
 .btn {
     @apply cursor-pointer font-normal text-center rounded-sm mx-2 my-3 px-5 py-2 transition duration-200 ease-in-out;
 }
+.link {
+    @apply font-medium text-indigo-500 hover:underline hover:text-indigo-500;
+}
 .btn-icon {
-    @apply flex gap-2 items-center justify-center text-sm;
+    @apply inline-flex gap-2 items-center justify-center text-sm;
 }
 .btn-rounded {
     @apply rounded-full;
 }
 .btn-primary {
-    @apply cursor-pointer bg-indigo-700 text-white ;
+    @apply cursor-pointer bg-indigo-600 text-white ;
 }
 
 .btn-primary:hover {
-    @apply bg-indigo-500;
+    @apply bg-indigo-800;
 }
 .btn-danger {
     @apply cursor-pointer bg-red-500 text-white ;
@@ -135,4 +144,23 @@ body {
 
 .form-input:focus, .form-textarea:focus, .form-select:focus, .form-date:focus {
     @apply outline-none ring-3 ring-indigo-400 border-indigo-800;
+}
+.table-container {
+    @apply relative overflow-x-auto shadow-md sm:rounded-lg;
+}
+
+.table-container table {
+    @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+}
+.table-container thead {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+}
+.table-container th {
+    @apply text-xs px-6 py-3;
+}
+.table-container tbody tr {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200;
+}
+.table-container tbody td {
+    @apply px-6 py-3;
 }

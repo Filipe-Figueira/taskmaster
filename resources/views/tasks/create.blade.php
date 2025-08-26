@@ -17,7 +17,7 @@
 
     <form action="{{ route('tasks.store') }}" method="post" class="form">
         @csrf
-        <input type="hidden" name="user_id" value="{{ $userId }}">
+        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <label for="category" class="form-label">Categoria</label>
         <select name="category_id" id="category" class="form-select">
             @foreach ($categories as $category)
@@ -69,6 +69,6 @@
         </div>
 
         <button type="submit"
-            class="btn btn-primary btn-icon">Salvar</button>
+            class="btn btn-primary btn-icon"><i class="fa fa-file"></i> Salvar</button>
     </form>
 @endsection

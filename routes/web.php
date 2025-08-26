@@ -5,7 +5,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [TaskController::class, 'create'])->middleware('auth');
+Route::get('/', function () {
+    return view('dashboard');
+})->middleware('auth');
 
 Route::get('auth', [AuthController::class, 'index'])->name('auth.index');
 Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
