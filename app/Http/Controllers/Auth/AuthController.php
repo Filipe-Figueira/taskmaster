@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $credentials = $request->validated();
 
-        if (!Auth::attempt($credentials)):
+        if (!Auth::attempt($credentials, $request->remember)):
             return back()->withErrors('Email/Senha Inválido!');
         endif;
 
@@ -32,7 +32,7 @@ class AuthController extends Controller
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
-        Auth::login($user);
+        Auth::login($user, $request->remember);
         return redirect('/');
     }
     public function logout()

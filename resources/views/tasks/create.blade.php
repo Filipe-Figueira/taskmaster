@@ -17,7 +17,6 @@
 
     <form action="{{ route('tasks.store') }}" method="post" class="form">
         @csrf
-        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
         <label for="category" class="form-label">Categoria</label>
         <select name="category_id" id="category" class="form-select">
             @foreach ($categories as $category)

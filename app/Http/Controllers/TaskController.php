@@ -23,7 +23,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::where('user_id', Auth::user()->id)->get();
-        
+
         return view('tasks.index', compact('tasks'));
     }
 
@@ -34,7 +34,7 @@ class TaskController extends Controller
     {
         $userId = Auth::user()->id;
         $categories = Category::all();
-        return view('tasks.create', compact('categories', 'userId'));
+        return view('tasks.create', compact('categories'));
     }
 
     /**
@@ -43,9 +43,11 @@ class TaskController extends Controller
     public function store(TaskStoreRequest $request)
     {
         $data = $request->validated();
+        $userId = auth()->user()->id;
+        $data['user_id'] =  $userId;
         $task = Task::create($data);
 
-        return response()->json($task, 201);
+        return response()->json($data, 201);
     }
 
     /**
