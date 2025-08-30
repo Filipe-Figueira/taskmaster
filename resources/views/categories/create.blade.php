@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('categories.store') }}" method="post" class="form w-80">
+    <form action="{{ route('categories.store') }}" method="post" class="form">
         @csrf
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
