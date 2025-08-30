@@ -20,21 +20,39 @@ body {
 .h2 {
     @apply text-xl font-medium mb-4 text-center uppercase;
 }
-.navbar {
-    @apply w-35 flex flex-col bg-gray-800/90 rounded-2xl gap-12 justify-between p-4 overflow-hidden;
+.sidebar {
+    @apply relative w-40 min-w-30 flex flex-col bg-gray-800/90 rounded-2xl gap-12 justify-between p-4 transition-all duration-800 ease-in-out;
 }
 
-.navbar ul li a {
-    @apply flex items-center flex-col justify-center gap-3 p-2 text-sm rounded-xl transition;
+.sidebar .logo-container {
+    @apply flex items-center gap-3 mb-10 w-full;
+}
+.sidebar .logo-container button {
+    @apply cursor-pointer bg-indigo-800 text-white p-2 rounded-lg;
+}
+.sidebar .logo-container img {
+    @apply block object-cover rounded-full;
+}
+.sidebar ul li a {
+    @apply flex items-center gap-2 p-2 text-sm rounded-xl transition overflow-hidden;
+}
+.sidebar-mobile ul li a span {
+    @apply w-0 h-0 overflow-hidden whitespace-nowrap overflow-ellipsis font-normal transition-[width] duration-600;
+}
+.sidebar-mobile {
+    @apply w-20 min-w-20 max-w-20;
+}
+.menu-mobile {
+    @apply flex-col justify-center text-[8px];
 }
 
-.navbar ul li a:hover {
+.sidebar ul li a:hover {
     @apply text-indigo-400 bg-gray-600;
 }
-.navbar ul li a i {
+.sidebar ul li a i {
     @apply  text-inherit text-lg;
 }
-.navbar ul li a span {
+.sidebar ul li a span {
     @apply font-medium;
 }
 
@@ -118,7 +136,7 @@ body {
     @apply rounded-2xl ring-2 ring-slate-700;
 }
 .form {
-    @apply p-6 flex flex-col gap-3 rounded-2xl border-2 border-slate-700;
+    @apply max-w-100 p-6 flex flex-col gap-3 rounded-2xl border-2 border-slate-700;
 }
 .form-label {
     @apply block indent-2 mb-3 text-sm font-medium;
