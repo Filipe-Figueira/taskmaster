@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequests\TaskStoreRequest;
 use App\Models\Category;
 use App\Models\Task;
-use App\Repositories\Interfaces\TaskRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

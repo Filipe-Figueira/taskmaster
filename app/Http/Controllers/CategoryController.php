@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Categories\CategoryStoreRequest;
 use App\Models\Category;
+use App\Models\Task;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +56,8 @@ public function __construct(CategoryService $categoryService) {
      */
     public function show(string $id)
     {
-        $category = Category::findOrFail($id);
+        $category = Task::select(['id', 'title'])->where('user_id', auth()->user()->id)->where('category_id', $id)->get();
+        return view('categories.create');
         return response()->json($category);
     }
 
