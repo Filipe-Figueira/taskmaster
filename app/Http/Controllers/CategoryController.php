@@ -57,7 +57,7 @@ public function __construct(CategoryService $categoryService) {
     public function show(string $id)
     {
         $category = Task::select(['id', 'title'])->where('user_id', auth()->user()->id)->where('category_id', $id)->get();
-        return view('categories.create');
+        
         return response()->json($category);
     }
 
