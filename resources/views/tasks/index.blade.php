@@ -44,7 +44,9 @@
                     <a href="{{ route('tasks.show', ['task' => $task->id])}}" class="link">{{ $task->title }}</a>
                 </td>
                 <td>
-                    {{ $task->category_id }}
+                    <a href="{{ route('categories.show', ['category' => $task->category_id]) }}" class="link">
+                        {{ $task->category->name }}
+                    </a>
                 </td>
                 <td>
                     {{ $task->priority }}
@@ -56,7 +58,7 @@
                     {{ $task->due_date->format('d/m/Y') }}
                 </td>
                 <td>
-                    <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="link">Edit</a>
+                    <a href="{{ route('tasks.edit', ['task' => $task->id]) }}" class="link">Editar</a>
                 </td>
                 <td>
                     <form action="{{ route('tasks.destroy', ['task' => $task->id]) }}" method="post">
