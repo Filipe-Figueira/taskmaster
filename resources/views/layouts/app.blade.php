@@ -49,10 +49,10 @@
                             <span class="item-description">Notifications</span>
                         </a>
                     </li>
-                    <li title="Email">
+                    <li title="Profile">
                         <a href="#">
-                            <i class="fa fa-envelope"></i>
-                            <span class="item-description">Email</span>
+                            <i class="fa fa-user"></i>
+                            <span class="item-description">Profile</span>
                         </a>
                     </li>
                 </ul>
