@@ -28,15 +28,28 @@
                             <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit"
-                                    class="btn btn-danger btn-icon"><i class="fa fa-trash"></i> Excluír</button>
-                            </form>
+                                <button type="button" class="btn btn-danger btn-icon" name="open-modal" id="categoria-{{ $category->id}}"><i class="fa fa-trash"></i> Excluír</button>
+                                <dialog>
+                                    <div class="flex items-center-justify-center gap-3">
+                                        <button type="button" class="btn btn-danger btn-icon"><i class="fa fa-trash"></i> Sim</button>
+                                        <button type="button" class="btn btn-danger btn-icon"><i class="fa fa-trash"></i> Não</button>
+                                    </div>
+                                </dialog>
+                                </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+
+    <script src="{{asset('js/jquery-3.7.1.min.js')}}">
+    </script>
+    <script>
+        let openModal = $('form').on('click', function (e) {
+        console.log(e);
+    })
+    </script>
 
 </div>
 @endsection
