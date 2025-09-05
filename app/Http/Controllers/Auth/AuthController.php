@@ -20,6 +20,7 @@ class AuthController extends Controller
     {
 
         $credentials = $request->validated();
+        array_pop($credentials);
 
         if (!Auth::attempt($credentials, $request->remember)):
             return back()->withErrors('Email/Senha Inválido!');
