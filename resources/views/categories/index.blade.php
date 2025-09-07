@@ -25,31 +25,34 @@
                                 class="btn btn-inverse-info btn-icon btn-sm">Editar<i class="fa fa-pencil"></i></a>
                         </td>
                         <td>
-                            <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post">
-                                @method('DELETE')
+                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="delete-form">
                                 @csrf
-                                <button type="button" class="btn btn-danger btn-icon" name="open-modal" id="categoria-{{ $category->id}}"><i class="fa fa-trash"></i> Excluír</button>
-                                <dialog>
-                                    <div class="flex items-center-justify-center gap-3">
-                                        <button type="button" class="btn btn-danger btn-icon"><i class="fa fa-trash"></i> Sim</button>
-                                        <button type="button" class="btn btn-danger btn-icon"><i class="fa fa-trash"></i> Não</button>
-                                    </div>
-                                </dialog>
-                                </form>
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-icon">
+                                    <i class="fa fa-trash"></i> Excluir
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
-    <script src="{{asset('js/jquery-3.7.1.min.js')}}">
-    </script>
-    <script>
-        let openModal = $('form').on('click', function (e) {
-        console.log(e);
-    })
-    </script>
-
+    <dialog id="modal" class="rounded-lg shadow-lg p-6 w-96">
+        <h3 class="text-lg font-bold mb-4">Confirmar Exclusão</h3>
+        <p class="mb-6 text-gray-600">Tem certeza que deseja excluir esta categoria?</p>
+        <div class="flex justify-end gap-2">
+            <button id="cancelDelete" type="button"
+                class="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Cancelar</button>
+            <button id="confirmDelete" type="button"
+                class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700">
+                <i class="fa fa-trash"></i> Excluir
+            </button>
+        </div>
+    </dialog>
 </div>
+@push('ajax-requests')
+        <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
+        <script src="{{ asset('js/ajax-requests.js') }}"></script>
+    @endpush
 @endsection

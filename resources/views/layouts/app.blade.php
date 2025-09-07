@@ -18,7 +18,7 @@
         <nav id="sidebar" class="sidebar">
             <div>
                 <div class="logo-container">
-                    <a href=""><img src="{{ asset('images/taskmaster-logo.jpg')}}" alt="tasmaster-logo"></a>
+                    <a href=""><img src="{{ asset('images/taskmaster-logo.jpg') }}" alt="tasmaster-logo"></a>
 
                     <button id="btn-menu">
                         <i class="fa fa-bars"></i>
@@ -78,6 +78,7 @@
             @yield('content')
         </section>
     </main>
+    @stack('ajax-requests')
 
     <script>
         const btnMenu = document.getElementById('btn-menu');
@@ -85,7 +86,7 @@
         const menu = document.querySelectorAll("#sidebar ul li a");
 
         btnMenu.addEventListener('click', () => {
-           // sidebar.classList.toggle('-translate-x-full')
+            // sidebar.classList.toggle('-translate-x-full')
             menu.forEach(i => {
 
                 i.classList.toggle('menu-mobile');
@@ -93,7 +94,6 @@
             sidebar.classList.toggle('sidebar-mobile')
         });
     </script>
-
 </body>
 
 </html>
