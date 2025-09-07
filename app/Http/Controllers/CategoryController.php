@@ -88,10 +88,10 @@ public function __construct(CategoryService $categoryService) {
      */
     public function destroy(string $id)
     {
-        $category = Category::find($id);
+        /*$category = Category::find($id);
         if (!$category->delete()):
             return "Erro ao deletar";
-        endif;
+        endif;*/
         return response()->json("Categoria deletada", 200);;
     }
 }

@@ -12,78 +12,80 @@
 
 <body>
 
-    <!-- Botão para abrir sidebar no mobile -->
     <section class="bordered w-full h-full bg-gray-950/20 flex backdrop-blur-md shadow-lg shadow-black/25">
         <!-- Sidebar -->
         <nav id="sidebar" class="sidebar">
             <div>
                 <div class="logo-container">
-                    <img src="{{ asset('images/taskmaster-logo.jpg')}}" alt="tasmaster-logo">
+                    <a href=""><img src="{{ asset('images/taskmaster-logo.jpg') }}" alt="tasmaster-logo"></a>
 
-                    <button id="btnMenu">
+                    <button id="btn-menu">
                         <i class="fa fa-bars"></i>
                     </button>
                 </div>
                 <ul class="space-y-2">
-                    <li>
+                    <li title="Dashboard">
                         <a href="#">
                             <i class="fa fa-chart-line"></i>
-                            <span>Dashboard</span>
+                            <span class="item-description">Dashboard</span>
                         </a>
                     </li>
-                    <li>
+                    <li title="Categorias">
                         <a href="{{ route('categories.index') }}">
                             <i class="fa fa-layer-group"></i>
-                            <span>Categorias</span>
+                            <span class="item-description">Categorias</span>
                         </a>
                     </li>
-                    <li>
+                    <li title="Tarefas">
                         <a href="{{ route('tasks.index') }}">
                             <i class="fa fa-tasks"></i>
-                            <span>Tarefas</span>
+                            <span class="item-description">Tarefas</span>
                         </a>
                     </li>
-                    <li>
+                    <li title="Notifications">
                         <a href="#">
                             <i class="fa fa-bell"></i>
-                            <span>Notifications</span>
+                            <span class="item-description">Notifications</span>
                         </a>
                     </li>
-                    <li>
+                    <li title="Profile">
                         <a href="#">
-                            <i class="fa fa-envelope"></i>
-                            <span>Email</span>
+                            <i class="fa fa-user"></i>
+                            <span class="item-description">Profile</span>
                         </a>
                     </li>
                 </ul>
             </div>
 
-            <div class=" flex flex-col items-center justify-center gap-3">
-                <div class="flex flex-col justify-center items-center gap-3 mb-4 text-center">
-                    <img src="{{ asset('images/avatar.jpg') }}" alt="avatar"
-                        class="w-10 h-10 rounded-full object-cover">
-                    <p class="text-sm"><span class="font-medium">{{ auth()->user()->name }}</span></p>
-                </div>
-                <form action="{{ route('auth.logout') }}" method="POST" class="flex items-center justify-center gap-2">
+            <aside id="account">
+                <a href="#" id="avatar-container">
+                    <img src="{{ asset('images/avatar.jpg') }}" alt="avatar" title="{{ auth()->user()->name }}">
+                    <span class="item-description">{{ auth()->user()->name }}</span>
+                </a>
+                <form action="{{ route('auth.logout') }}" method="POST">
                     @csrf
-                    <button class="btn btn-danger btn-icon"><i class="fa fa-sign-out-alt"></i>Sair</button>
+                    <button title="Logout" class="btn btn-danger btn-icon">
+                        <i class="fa fa-sign-out-alt"></i>
+                        <span class="item-description">Sair</span>
+                    </button>
                 </form>
-            </div>
+            </aside>
             </div>
         </nav>
         <!-- Main content -->
-        <main class="flex-1 p-6 overflow-y-auto">
+        <section class="flex-1 p-6 overflow-y-auto">
             @yield('content')
-        </main>
-    </section>
+        </section>
+    </main>
+    @stack('ajax-requests')
 
     <script>
-        const btnMenu = document.getElementById('btnMenu');
+        const btnMenu = document.getElementById('btn-menu');
         const sidebar = document.getElementById('sidebar');
         const menu = document.querySelectorAll("#sidebar ul li a");
 
         btnMenu.addEventListener('click', () => {
-           // sidebar.classList.toggle('-translate-x-full')
+            // sidebar.classList.toggle('-translate-x-full')
             menu.forEach(i => {
 
                 i.classList.toggle('menu-mobile');
@@ -91,7 +93,5 @@
             sidebar.classList.toggle('sidebar-mobile')
         });
     </script>
-
 </body>
-
 </html>

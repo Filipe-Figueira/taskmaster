@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', function () {
     return view('dashboard');
 })->middleware('auth');
+Route::get('/modal', function () {
+    return view('modal');
+});
 
 Route::get('auth', [AuthController::class, 'index'])->name('auth.index');
 Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
