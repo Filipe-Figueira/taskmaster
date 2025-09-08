@@ -76,6 +76,7 @@
         <section class="flex-1 p-6 overflow-y-auto">
             @yield('content')
         </section>
+    </section>
     </main>
     @stack('ajax-requests')
 
