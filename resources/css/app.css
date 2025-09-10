@@ -17,7 +17,7 @@ body {
     @apply w-full h-full bg-gray-950/20 flex backdrop-blur-md shadow-lg shadow-black/25;
 }
 .h1 {
-    @apply text-2xl font-bold mb-6 flex items-center gap-2 uppercase;
+    @apply text-2xl font-bold mb-6 uppercase;
 }
 .h2 {
     @apply text-xl font-medium mb-4 text-center uppercase;
@@ -39,7 +39,7 @@ body {
     @apply flex items-center gap-3 p-2 text-sm rounded-sm overflow-hidden max-md:flex-col;
 }
 .sidebar ul li a:hover {
-    @apply text-indigo-500 bg-gray-600;
+    @apply text-indigo-300 bg-gray-700;
 }
 .sidebar ul li a i {
     @apply  text-inherit text-lg;
@@ -75,7 +75,7 @@ body {
 
 
 .btn {
-    @apply cursor-pointer font-normal text-center rounded-sm mx-2 my-3 px-5 py-2 transition duration-200 ease-in-out;
+    @apply cursor-pointer font-semibold text-center rounded-sm mx-2 my-3 px-5 py-2 transition duration-200 ease-in-out;
 }
 .link {
     @apply font-medium text-indigo-500 hover:underline hover:text-indigo-500;
@@ -154,7 +154,7 @@ body {
     @apply rounded-2xl ring-2 ring-slate-700;
 }
 .form {
-    @apply max-w-100 p-6 flex flex-col gap-3 rounded-2xl border-2 border-slate-700;
+    @apply w-80 p-6 flex flex-col gap-3 rounded-2xl border-2 border-slate-700;
 }
 .form-label {
     @apply block indent-2 mb-3 text-sm font-medium;
@@ -180,6 +180,26 @@ body {
 
 .form-input:focus, .form-textarea:focus, .form-select:focus, .form-date:focus {
     @apply outline-none ring-3 ring-indigo-400 border-indigo-800;
+}
+
+.form-checkbox {
+    @apply flex items-center gap-2;
+}
+.form-checkbox label {
+    @apply ms-2 text-sm font-medium;
+}
+.form-checkbox input[type="checkbox"] {
+    @apply w-3 h-3 rounded-sm focus:ring-indigo-600 ring-offset-indigo-300 focus:ring-2;
+}
+
+.alternative-auth {
+    @apply flex flex-col items-center justify-center gap-1;
+}
+.alternative-auth hr{
+    @apply h-0.5 w-[80%] bg-gray-700;
+}
+.alternative-auth a{
+    @apply hover:underline hover:text-indigo-300 transition;
 }
 .table-container {
     @apply relative overflow-x-auto shadow-md sm:rounded-lg;
