@@ -10,11 +10,19 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('auth', [AuthController::class, 'index'])->name('auth.index');
-Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
-Route::post('auth/register', [AuthController::class, 'register'])->name('auth.register');
-Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::middleware(['guest'])->group(function () {
+    Route::get('login', [AuthController::class, 'index'])->name('login');
+    Route::get('register', [AuthController::class, 'create'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('authenticate');
+    Route::post('/register', [AuthController::class, 'register'])->name('storeUser');
+    
+});
 
-Route::resource('tasks', TaskController::class)->middleware('auth');
-Route::resource('categories', CategoryController::class)->middleware('auth');
-Route::resource('users', UserController::class)->except('store')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::resource('tasks', TaskController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('users', UserController::class)->except(['store', 'index']);
+    Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+

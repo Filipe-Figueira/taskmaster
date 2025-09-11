@@ -62,7 +62,7 @@
                     <img src="{{ asset('images/avatar.jpg') }}" alt="avatar" title="{{ auth()->user()->name }}">
                     <span class="item-description">{{ auth()->user()->name }}</span>
                 </a>
-                <form action="{{ route('auth.logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button title="Logout" class="btn btn-danger btn-icon">
                         <i class="fa fa-sign-out-alt"></i>

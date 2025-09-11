@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('title', 'Login')
 @section('content')
-    <form action="{{ route('auth.login') }}" method="POST" class="form">
+    <form action="{{ route('authenticate') }}" method="POST" class="form">
         <h1 class="h1 text-center">Login</h1>
         @csrf
         <div>
@@ -15,14 +15,14 @@
         </div>
         <div class="form-checkbox">
             <label for="remember">Lembre-me</label>
-            <input id="remember" name="remember" type="checkbox" value="{{ old('remember') }}">
+            <input type="checkbox" id="remember" name="remember">
         </div>
 
         <button type="submit" class="btn btn-primary">Entrar</button>
 
         <div class="alternative-auth">
             <hr>
-            <a href="">Não tenho uma conta</a>
+            <a href="{{ route('register') }}">Não tenho uma conta</a>
         </div>
     </form>
 @endsection
