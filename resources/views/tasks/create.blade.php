@@ -28,7 +28,6 @@
                 class="form-textarea" value="{{ old('description') }}">{{ old('description') }}</textarea>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
             <div>
                 <label for="priority" class="form-label">Prioridade</label>
                 <select name="priority" id="priority"
@@ -39,20 +38,6 @@
                     <option value="Alta">Alta</option>
                 </select>
             </div>
-            <div>
-                <label for="status" class="form-label">Status</label>
-                <select name="status" id="status"
-                    class="form-select">
-                    <div>
-                        <option value="">Selecione...</option>
-                        <option value="Pendente">Pendente</option>
-                        <option value="Concluída">Concluída</option>
-                        <option value="Atrasada">Atrasada</option>
-                    </div>
-                </select>
-            </div>
-        </div>
-
         <div>
             <label for="due_date" class="form-label">Prazo para finalizar</label>
             <input type="date" name="due_date" id="due_date"

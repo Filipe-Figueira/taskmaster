@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class)->except(['store', 'index', 'show']);
     Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
     Route::put('password-update', [UserController::class, 'passwordUpdate'])->name('password.update');
+    Route::put('user/add-avatar', [UserController::class, 'addAvatar'])->name('users.add-avatar');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

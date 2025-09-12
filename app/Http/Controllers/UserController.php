@@ -3,21 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequests\UpdateUserRequest;
+use App\Http\Requests\UserRequests\UserAddAvatarRequest;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use stdClass;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         if (!$user = auth()->user()) return to_route('home');
 
-        $status = new stdClass;
 
-        $status->pendente = $user->tasks()->where('status', 'Pendente')->count();
-        $status->concluida = $user->tasks()->where('status', 'Concluída')->count();
-        $status->atrasada = $user->tasks()->where('status', 'Atrasada')->count();
-        
+        $priority = array(
+            'baixa' => $user->tasks()->where('priority', 'Baixa')->count(),
+            'media' => $user->tasks()->where('priority', 'Média')->count(),
+            'alta' => $user->tasks()->where('priority', 'Alta')->count()
+        );
 
-        return view('users.dashboard', compact('status'));
+        $priority = collect($priority);
+        return view('users.dashboard', compact('priority'));
     }
 
     /**
@@ -33,12 +39,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, )
+    public function update(UpdateUserRequest $request,)
     {
         if (!$user = auth()->user()) return to_route('home');
         $data = array_filter($request->validated());
         $user->update($data);
-        return response()->json('Seus dados foram actualizados.', 200);
+        return back()->with('message', 'Seus dados foram actualizados. com sucesso!');
     }
 
     /**
@@ -60,5 +66,24 @@ class UserController extends Controller
 
         return response()->json("A sua senha foi alterada com sucesso!", 200);;
     }
-    
+    public function addAvatar(UserAddAvatarRequest $request)
+    {
+        if (!$user = auth()->user()) return to_route('home');
+
+        if ($request->hasFile('avatar')):
+            $file = $request->file('avatar');
+            $extension = "." . $file->extension();
+            $name = Carbon::now() . '-' . $user->name;
+            $filename = Str::slug($name) . $extension;
+
+            $avatar = $request->file('avatar')->storeAs('avatars', $filename);
+            if (Storage::fileExists($user->avatar ?? '')):
+                Storage::delete($user->avatar);
+            endif;
+            $user->where('id', $user->id)->update(['avatar' => $avatar]);
+        endif;
+
+
+        return back()->with('message', 'Foto adicionada com sucesso!');
+    }
 }

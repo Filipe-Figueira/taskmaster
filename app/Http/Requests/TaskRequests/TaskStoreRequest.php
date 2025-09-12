@@ -26,9 +26,7 @@ class TaskStoreRequest extends FormRequest
             'title' => ['required', 'min:3'],
             'description' => 'nullable',
             'priority' => 'required|in:Baixa,Média,Alta',
-            'status' => 'required|in:Pendente,Atrasada,Concluída',
             'due_date' => 'required|date|after_or_equal:tomorrow'
-
         ];
     }
 
@@ -37,5 +35,12 @@ class TaskStoreRequest extends FormRequest
         return [
             'due_date.after_or_equal' => 'Selecione uma data igual ou posterior à amanhã.'
         ];
+    }
+    public function attributes()
+    {
+       return [
+            'due_date' => 'prazo',
+            'category_id' => 'categoria',
+        ]; 
     }
 }

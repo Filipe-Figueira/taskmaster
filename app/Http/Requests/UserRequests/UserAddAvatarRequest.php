@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests\TaskRequests;
+namespace App\Http\Requests\UserRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
-class TaskUpdateRequest extends FormRequest
+class UserAddAvatarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +24,11 @@ class TaskUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'nullable',
-            'title' => ['required', 'min:3'],
-            'description' => 'nullable',
-            'priority' => 'nullable|in:Baixa,Média,Alta',
-            'due_date' => 'nullable|date|after_or_equal:tomorrow'
-
+            'avatar' => [
+                'required',
+                'file',
+                File::image()->max('4mb'),
+            ],
         ];
     }
 }

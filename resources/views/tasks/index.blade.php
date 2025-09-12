@@ -23,9 +23,6 @@
                         Prioridade
                     </th>
                     <th scope="col">
-                        Status
-                    </th>
-                    <th scope="col">
                         Prazo
                     </th>
                     <th scope="col">
@@ -52,9 +49,6 @@
                     </td>
                     <td>
                         {{ $task->priority }}
-                    </td>
-                    <td>
-                        {{ $task->status }}
                     </td>
                     <td>
                         {{ $task->due_date->format('d/m/Y') }}

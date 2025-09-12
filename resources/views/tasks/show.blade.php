@@ -9,7 +9,6 @@
         <li>Título: {{ $task->title }}</li>
         <li>Descrição: {{ $task->description }}</li>
         <li>Prioridade: {{ $task->priority }}</li>
-        <li>Status: {{ $task->status }}</li>
         <li>Prazo p/ finalizar: {{ $task->due_date->format('d-m-Y') }}</li>
     </ul>
 @endsection
