@@ -25,7 +25,7 @@
                 </div>
                 <ul class="space-y-2">
                     <li title="Dashboard">
-                        <a href="#">
+                        <a href="{{ route('dashboard') }}">
                             <i class="fa fa-chart-line"></i>
                             <span class="item-description">Dashboard</span>
                         </a>
@@ -58,7 +58,7 @@
             </div>
 
             <aside id="account">
-                <a href="#" id="avatar-container">
+                <a href="{{ route('users.edit', ['user' => auth()->user()->id]) }}" id="avatar-container">
                     <img src="{{ asset('images/avatar.jpg') }}" alt="avatar" title="{{ auth()->user()->name }}">
                     <span class="item-description">{{ auth()->user()->name }}</span>
                 </a>

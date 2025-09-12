@@ -49,7 +49,9 @@
             <h2 class="text-lg font-bold">Excluir Conta</h2>
             <p class="max-w-100 text-sm font-light text-left">Se excluir a sua conta. Todas as suas informações e recursos
                 criados (tarefas, categorias), serão permanentemente eliminados.</p>
-            <div><button class="btn btn-danger">Excluir conta</button></div>
+            <div>
+                <button class="btn btn-danger">Excluir conta</button>
+            </div>
         </form>
     </section>
 @endsection

@@ -3,25 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequests\TaskStoreRequest;
+use App\Http\Requests\TaskRequests\TaskUpdateRequest;
 use App\Models\Category;
 use App\Models\Task;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    protected $taskService;
 
-    public function __construct()
-    {
-
-    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasks = Task::where('user_id', Auth::user()->id)->with('category:id,name')->get();
+        $tasks = Task::where('user_id', Auth::user()->id)->with('category:id,name')->paginate(15);
 
         return view('tasks.index', compact('tasks'));
     }
@@ -31,7 +26,6 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $userId = Auth::user()->id;
         $categories = Category::all();
         return view('tasks.create', compact('categories'));
     }
@@ -42,11 +36,10 @@ class TaskController extends Controller
     public function store(TaskStoreRequest $request)
     {
         $data = $request->validated();
-        $userId = auth()->user()->id;
-        $data['user_id'] =  $userId;
-        $task = Task::create($data);
-
-        return response()->json($data, 201);
+        $data['user_id'] =  Auth::user()->id;
+        Task::create($data);
+        
+        return to_route('tasks.index')->with('message', 'Tarefa criada com sucesso!');
     }
 
     /**
@@ -54,9 +47,9 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        $task = Task::find($id);
+        if(!$task = Task::find($id)) return back();
 
-        return response()->json($task, 200);
+        return view('tasks.show', compact('task'));
     }
 
     /**
@@ -64,18 +57,22 @@ class TaskController extends Controller
      */
     public function edit(string $id)
     {
-        return view('tasks.create');
+        if (!$task = Task::find($id)) return back();
+        $categories = Category::select(['id', 'name'])->get();
+    
+        return view('tasks.edit', compact('task', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TaskUpdateRequest $request, string $id)
     {
-        $data = $request->all();
-
-        $task = Task::where('id', $id)->update($data);
-        return response()->json($task, 200);
+        if (!Task::find($id)) return back();
+        $data = array_filter($request->validated());
+        
+        Task::where('id', $id)->update($data);
+        return to_route('tasks.index')->with('message', 'Tarefa actualizada com sucesso!');
     }
 
     /**
@@ -84,6 +81,6 @@ class TaskController extends Controller
     public function destroy(string $id)
     {
         $task = Task::destroy($id);
-        return response()->json('Tarefa excluída.', 204);
+        return back()->with('message', 'Tarefa excluída.');
     }
 }

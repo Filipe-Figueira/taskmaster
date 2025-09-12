@@ -2,31 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Categories\CategoryStoreRequest;
+use App\Http\Requests\CategoryRequests\CategoryStoreUpdateRequest;
 use App\Models\Category;
 use App\Models\Task;
 use App\Services\CategoryService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
-protected $categoryService;
-
-public function __construct(CategoryService $categoryService) {
-    $this->categoryService = $categoryService;
-}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        try {
-            $categories = $this->categoryService->all();
-            return view('categories.index', compact('categories'));
-        } catch (\Throwable $e) {
-            return $e;
-        }
+        $categories = Category::select(['id', 'name'])->paginate(15);
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -34,21 +23,18 @@ public function __construct(CategoryService $categoryService) {
      */
     public function create()
     {
-        if ($userId = Auth::user()->id):
-            return view('categories.create', compact('userId'));
-        endif;
-
-        return back();
+        return view('categories.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryStoreUpdateRequest $request)
     {
         $data = $request->validated();
-        $category = Category::create($data);
-        return response()->json($category, 201);
+        $data['user_id'] = auth()->user()->id;
+        Category::create($data);
+        return to_route('categories.index')->with('message', 'Categoria criada com sucesso!');
     }
 
     /**
@@ -56,9 +42,15 @@ public function __construct(CategoryService $categoryService) {
      */
     public function show(string $id)
     {
-        $category = Task::select(['id', 'title'])->where('user_id', auth()->user()->id)->where('category_id', $id)->get();
+        $userId = auth()->user()->id;
         
-        return response()->json($category);
+        if (!$category = Category::select(['name'])->where('user_id', $userId)->find($id)):
+            return back();
+        endif;
+
+        $tasks = Task::select(['id', 'title'])->where('user_id', $userId)->where('category_id', $id)->paginate(15);
+    
+        return view('categories.show', compact('category','tasks'));
     }
 
     /**
@@ -67,7 +59,7 @@ public function __construct(CategoryService $categoryService) {
     public function edit(string $id)
     {
         if (!$category = Category::where('id', $id)->first()):
-            return back()->json(['message' => 'Não encontrado', 404]);
+            return back();
         endif;
 
         return view('categories.edit', compact('category'));
@@ -76,11 +68,11 @@ public function __construct(CategoryService $categoryService) {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryStoreUpdateRequest $request, string $id)
     {
         $category = Category::where('id', $id)->first();
-        $category = $category->update($request->all());
-        return response()->json($category, 200);
+        $category = $category->update($request->validated());
+        return to_route('categories.index')->with('message', 'Categoria actualizada com sucesso!');
     }
 
     /**
@@ -88,10 +80,10 @@ public function __construct(CategoryService $categoryService) {
      */
     public function destroy(string $id)
     {
-        /*$category = Category::find($id);
-        if (!$category->delete()):
-            return "Erro ao deletar";
-        endif;*/
-        return response()->json("Categoria deletada", 200);;
+        if (!$category = Category::find($id)):
+            return response()->json('Categoria não encontrada!', 404);
+        endif;
+        $category->delete();
+        return response()->json("Categoria deletada", 200);
     }
 }

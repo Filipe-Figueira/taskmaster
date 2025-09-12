@@ -21,8 +21,9 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('tasks', TaskController::class);
     Route::resource('categories', CategoryController::class);
-    Route::resource('users', UserController::class)->except(['store', 'index']);
+    Route::resource('users', UserController::class)->except(['store', 'index', 'show']);
     Route::get('dashboard', [UserController::class, 'index'])->name('dashboard');
+    Route::put('password-update', [UserController::class, 'passwordUpdate'])->name('password.update');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

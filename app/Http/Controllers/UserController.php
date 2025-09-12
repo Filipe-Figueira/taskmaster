@@ -17,18 +17,7 @@ class UserController extends Controller
         $status->atrasada = $user->tasks()->where('status', 'Atrasada')->count();
         
 
-        return view('dashboard', compact('status'));
-    }
-
-   /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-
-        if (!$user = auth()->user()) return to_route('home');
-        
-        return $user;
+        return view('users.dashboard', compact('status'));
     }
 
     /**
@@ -38,7 +27,7 @@ class UserController extends Controller
     {
         if (!$user = auth()->user()) return to_route('home');
 
-        return $user;
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -47,8 +36,8 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, )
     {
         if (!$user = auth()->user()) return to_route('home');
-        
-        $user->update($request->validated());
+        $data = array_filter($request->validated());
+        $user->update($data);
         return response()->json('Seus dados foram actualizados.', 200);
     }
 
@@ -63,4 +52,13 @@ class UserController extends Controller
 
         return response()->json("A sua conta foi deletada!", 200);;
     }
+    public function passwordUpdate()
+    {
+        if (!$user = auth()->user()) return to_route('home');
+
+        //$user->destroy();
+
+        return response()->json("A sua senha foi alterada com sucesso!", 200);;
+    }
+    
 }
