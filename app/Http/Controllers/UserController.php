@@ -43,7 +43,7 @@ class UserController extends Controller
     {
         if (!$user = auth()->user()) return to_route('home');
         $data = array_filter($request->validated());
-        $user->update($data);
+        $user->where('id', $user->id)->update($data);
         return back()->with('message', 'Seus dados foram actualizados. com sucesso!');
     }
 
