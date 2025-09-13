@@ -16,24 +16,24 @@
         <!-- Pendentes -->
         <article class="shadow-lg rounded-2xl p-6 bordered hover:shadow-xl transition">
             <div class="flex items-center justify-between">
-                <span class="text-xs font-medium text-yellow-600 bg-yellow-100 px-2 py-1 rounded-full">Baixa</span>
-                <i class="fa fa-refresh text-yellow-500 text-2xl"></i>
+                <span class="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Baixa</span>
+                <i class="fa fa-refresh text-blue-500 text-2xl"></i>
             </div>
             <p class="text-5xl font-bold my-6 text-center">{{ $priority['baixa'] }}</p>
-            <div class="h-2 w-full bg-yellow-100 rounded-full overflow-hidden">
-                <div class="bg-yellow-500 h-2 w-3/6"></div>
+            <div class="h-2 w-full bg-blue-100 rounded-full overflow-hidden">
+                <div class="bg-blue-500 h-2 w-3/10"></div>
             </div>
         </article>
 
         <!-- Feitas -->
         <article class="shadow-lg rounded-2xl p-6 bordered hover:shadow-xl transition">
             <div class="flex items-center justify-between">
-                <span class="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">Média</span>
-                <i class="fa fa-check text-green-600 text-2xl"></i>
+                <span class="text-xs font-medium text-yellow-600 bg-yellow-100 px-2 py-1 rounded-full">Média</span>
+                <i class="fa fa-check text-yellow-600 text-2xl"></i>
             </div>
             <p class="text-5xl font-bold my-6 text-center">{{  $priority['media'] }}</p>
-            <div class="h-2 w-full bg-green-100 rounded-full overflow-hidden">
-                <div class="bg-green-500 h-2 w-full"></div>
+            <div class="h-2 w-full bg-yellow-100 rounded-full overflow-hidden">
+                <div class="bg-yellow-500 h-2 w-3/6"></div>
             </div>
         </article>
 
@@ -45,7 +45,7 @@
             </div>
             <p class="text-5xl font-bold my-6 text-center">{{ $priority['alta'] }}</p>
             <div class="h-2 w-full bg-red-100 rounded-full overflow-hidden">
-                <div class="bg-red-600 h-2 w-1/6"></div>
+                <div class="bg-red-600 h-2 w-4/5"></div>
             </div>
         </article>
     </section>
