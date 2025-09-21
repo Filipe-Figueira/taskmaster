@@ -17,7 +17,7 @@
         <nav id="sidebar" class="sidebar">
             <div>
                 <div class="logo-container">
-                    <a href=""><img src="{{ asset('images/taskmaster-logo.jpg') }}" alt="tasmaster-logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('images/taskmaster-logo.jpg') }}" alt="tasmaster-logo"></a>
 
                     <button id="btn-menu">
                         <i class="fa fa-bars"></i>

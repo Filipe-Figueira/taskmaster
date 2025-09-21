@@ -3,7 +3,8 @@
 namespace App\Http\Requests\UserRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rules\File;
 
 class UserAddAvatarRequest extends FormRequest
@@ -13,7 +14,7 @@ class UserAddAvatarRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Gate::allows('anyAction', Auth::user());
     }
 
     /**

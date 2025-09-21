@@ -6,7 +6,7 @@
         
         @include('partials.error-message')
 
-        <form action="{{ route('password.update') }}" method="POST" class="form">
+        <form action="{{ route('password.update') }}" method="POST" class="form" autocomplete="off">
             @csrf
             @method('PUT')
             <h2 class="text-lg font-bold">Atualizar a senha</h2>
@@ -14,7 +14,7 @@
                 e números.</p>
             <div>
                 <label for="current_password" class="form-label">Senha actual</label>
-                <input type="current_password" name="current_password" id="current_password" class="form-input">
+                <input type="password" name="current_password" id="current_password" class="form-input">
             </div>
             <div>
                 <label for="password" class="form-label">Nova Senha</label>
@@ -54,7 +54,6 @@
                         <svg class="w-8 h-8 mb-4 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                         </svg>
-                        <i class="fa fa-upload"></i>
                         <p class="mb-2 text-sm text-gray-400"><span class="font-semibold">Clique aqui p/ carregar</span> ou arraste o ficheiro</p>
                         <p class="text-xs text-gray-400">PNG, JPG (MAX. 800x400px)</p>
                     </div>

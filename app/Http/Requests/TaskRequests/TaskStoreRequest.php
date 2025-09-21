@@ -23,17 +23,17 @@ class TaskStoreRequest extends FormRequest
     {
         return [
             'category_id' => 'required',
-            'title' => ['required', 'min:3'],
+            'title' => ['required', 'min:3', 'max:255'],
             'description' => 'nullable',
             'priority' => 'required|in:Baixa,Média,Alta',
-            'due_date' => 'required|date|after_or_equal:tomorrow'
+            'due_date' => 'required|date|after_or_equal:today'
         ];
     }
 
     public function messages()
     {
         return [
-            'due_date.after_or_equal' => 'Selecione uma data igual ou posterior à amanhã.'
+            'due_date.after_or_equal' => 'Selecione uma data igual ou posterior à hoje.'
         ];
     }
     public function attributes()
