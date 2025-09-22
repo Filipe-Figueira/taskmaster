@@ -6,15 +6,23 @@ use App\Http\Requests\CategoryRequests\CategoryStoreUpdateRequest;
 use App\Models\Category;
 use App\Models\Task;
 use App\Services\CategoryService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
+    protected $service;
+
+    public function __construct(CategoryService $categoryService) {
+        $this->service = $categoryService;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::select(['id', 'name'])->paginate(15);
+        $categories = $this->service->list();
+
         return view('categories.index', compact('categories'));
     }
 
@@ -31,10 +39,13 @@ class CategoryController extends Controller
      */
     public function store(CategoryStoreUpdateRequest $request)
     {
-        $data = $request->validated();
-        $data['user_id'] = auth()->user()->id;
-        Category::create($data);
+        try {
+            $this->service->store($request->validated());
         return to_route('categories.index')->with('message', 'Categoria criada com sucesso!');
+        } catch (\Throwable $e) {
+            return back()->withErrors($e->getMessage());
+
+        }
     }
 
     /**
@@ -42,14 +53,10 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $userId = auth()->user()->id;
         
-        if (!$category = Category::select(['name'])->where('user_id', $userId)->find($id)):
-            return back();
-        endif;
+        $category = $this->service->find($id);
 
-        $tasks = Task::select(['id', 'title'])->where('user_id', $userId)->where('category_id', $id)->paginate(15);
-    
+        $tasks = Task::select(['id', 'title'])->where('user_id', Auth::id())->where('category_id', $id)->paginate(15);
         return view('categories.show', compact('category','tasks'));
     }
 
@@ -58,9 +65,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        if (!$category = Category::where('id', $id)->first()):
-            return back();
-        endif;
+        $category = $this->service->find($id);
 
         return view('categories.edit', compact('category'));
     }
@@ -70,8 +75,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryStoreUpdateRequest $request, string $id)
     {
-        $category = Category::where('id', $id)->first();
-        $category = $category->update($request->validated());
+        $category = $this->service->find($id);
+
+        $this->service->update($id, $request->validated());
         return to_route('categories.index')->with('message', 'Categoria actualizada com sucesso!');
     }
 
@@ -80,10 +86,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        if (!$category = Category::find($id)):
-            return response()->json('Categoria não encontrada!', 404);
-        endif;
-        $category->delete();
-        return response()->json("Categoria deletada", 200);
+        $this->service->delete($id);
+        return response()->json("Categoria excluída.", 204);
     }
 }

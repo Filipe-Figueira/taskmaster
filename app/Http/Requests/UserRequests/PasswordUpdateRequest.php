@@ -5,9 +5,9 @@ namespace App\Http\Requests\UserRequests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
-class UpdateUserRequest extends FormRequest
+class PasswordUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,16 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|min:3',
-            'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->user()->id)],
+            'current_password' => 'current_password',
+            'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->symbols()],
+            'password_confirmation' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'current_password.current_password' => 'Algo deu errado! Tente novamente mais tarde',
         ];
     }
 }

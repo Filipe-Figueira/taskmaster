@@ -26,8 +26,21 @@ class TaskUpdateRequest extends FormRequest
             'title' => ['required', 'min:3'],
             'description' => 'nullable',
             'priority' => 'nullable|in:Baixa,Média,Alta',
-            'due_date' => 'nullable|date|after_or_equal:tomorrow'
+            'due_date' => 'nullable|date|after_or_equal:today'
+        ];
+    }
 
+    public function messages()
+    {
+        return [
+            'due_date.after_or_equal' => 'Selecione uma data igual ou posterior à hoje.'
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            'due_date' => 'prazo',
+            'category_id' => 'categoria',
         ];
     }
 }
