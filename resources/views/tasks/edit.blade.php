@@ -9,6 +9,6 @@
         @method('PUT')
         @include('tasks.partials.task-fields')
         <button type="submit"
-            class="btn btn-primary btn-icon"><i class="fa fa-file"></i> Salvar</button>
+            class="btn btn-primary btn-icon">Salvar</button>
     </form>
 @endsection

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Gate;
 
 class TaskService
 {
-    public function verifyUniqueTitle($title)
+    public function verifyUniqueTitle($title, $category_id)
     {
-        return Task::where('user_id', Auth::id())->where('title', $title)->first();
+        return Task::where('user_id', Auth::id())->where('title', $title)->where('category_id', $category_id)->first();
     }
     public function list()
     {
@@ -21,8 +21,8 @@ class TaskService
     public function store(array $data)
     {
         Gate::authorize('create', Task::class);
-        if ($this->verifyUniqueTitle($data['title'])):
-            throw new \Exception("Você já criou uma tarefa com este título! Por favor escolha um nome diferente.");
+        if ($this->verifyUniqueTitle($data['title'], $data['category_id'])):
+            throw new \Exception("Você já criou uma tarefa pertencente a esta categoria com este título! Por favor escolha um nome/categoria diferente.");
         endif;
         $data['user_id'] =  Auth::id();
         return Task::create($data);

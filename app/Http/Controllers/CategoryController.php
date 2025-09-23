@@ -56,7 +56,7 @@ class CategoryController extends Controller
         
         $category = $this->service->find($id);
 
-        $tasks = Task::select(['id', 'title'])->where('user_id', Auth::id())->where('category_id', $id)->paginate(15);
+        $tasks = Task::select(['id', 'title', 'description'])->where('user_id', Auth::id())->where('category_id', $id)->paginate(15);
         return view('categories.show', compact('category','tasks'));
     }
 

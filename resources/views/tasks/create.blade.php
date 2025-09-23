@@ -44,6 +44,6 @@
                 class="form-date" value="{{ old('due_date')}}">
         </div>
         <button type="submit"
-            class="btn btn-primary btn-icon"><i class="fa fa-file"></i> Salvar</button>
+            class="btn btn-primary btn-icon">Salvar</button>
     </form>
 @endsection

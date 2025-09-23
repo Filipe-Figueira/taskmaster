@@ -91,6 +91,9 @@ class TaskController extends Controller
     public function destroy(string $id)
     {
         $this->service->delete($id);
-        return response()->json('Tarefa exlcuída!', 204);
+        return response()->json([
+            'message' => 'Tarefa excluída!',
+            'redirectRoute' =>  route('tasks.index')
+    ]);
     }
 }

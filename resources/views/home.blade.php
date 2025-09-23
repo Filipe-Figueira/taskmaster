@@ -17,7 +17,9 @@
         <!-- Hero -->
         <section class=" text-white py-20 rounded-t-2xl border-b-2 border-b-gray-800">
             <div class="max-w-5xl mx-auto text-center px-6">
-                <h1 class="text-5xl font-bold mb-6">TaskMaster</h1>
+                <a href="{{ route('home') }}" class="mb-6 flex items-center justify-center">
+                    <img src="{{ asset('images/taskmaster-logo.jpeg') }}" alt="taskmaster-logo" class="object-cover w-60 rounded-full">
+                </a>
                 <p class="text-xl mb-8 text-gray-200">
                     Organize suas tarefas e aumente sua produtividade com simplicidade e eficiência.
                 </p>

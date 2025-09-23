@@ -47,8 +47,10 @@ class UserController extends Controller
     public function destroy()
     {
         $this->service->delete();
-
-        return response()->json("A sua conta foi deletada!", 204);;
+        return response()->json([
+            'message' => 'A sua conta foi deletada!',
+            'redirectRoute' =>  route('home')
+    ]);
     }
 
     public function passwordUpdate(PasswordUpdateRequest $request)

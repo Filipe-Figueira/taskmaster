@@ -17,7 +17,7 @@ body {
     @apply w-full h-full bg-gray-950/20 flex backdrop-blur-md shadow-lg shadow-black/25;
 }
 .h1 {
-    @apply text-2xl font-bold mb-6 uppercase;
+    @apply text-3xl font-bold mb-8 uppercase;
 }
 .h2 {
     @apply text-xl font-medium mb-4 text-center uppercase;
@@ -75,7 +75,7 @@ body {
 
 
 .btn {
-    @apply cursor-pointer font-semibold text-center rounded-sm mx-2 my-3 px-5 py-2 transition duration-200 ease-in-out;
+    @apply text-white cursor-pointer font-medium text-sm px-5 py-2.5 me-2 mb-2 rounded-md transition duration-200 ease-in-out;
 }
 .link {
     @apply font-medium text-indigo-500 hover:underline hover:text-indigo-500;
@@ -87,67 +87,50 @@ body {
     @apply rounded-full;
 }
 .btn-primary {
-    @apply cursor-pointer bg-indigo-600 text-white ;
+    @apply bg-indigo-600 hover:bg-indigo-800 focus:ring-indigo-700 ;
 }
 
-.btn-primary:hover {
-    @apply bg-indigo-800;
-}
 .btn-danger {
-    @apply cursor-pointer bg-red-500 text-white ;
-}
-
-.btn-danger:hover {
-    @apply bg-red-600;
+    @apply bg-red-600 hover:bg-red-800 focus:ring-red-700; 
 }
 .btn-info {
-    @apply bg-blue-600 text-white ;
+    @apply bg-blue-600 hover:bg-blue-800 focus:ring-blue-700;
 }
 
-.btn-info:hover {
-    @apply bg-blue-500;
-}
-.btn-success {
-    @apply bg-green-600 text-white ;
+.btn-dark {
+    @apply  bg-gray-600 hover:bg-gray-800 focus:ring-gray-700
 }
 
-.btn-success:hover {
-    @apply bg-green-500;
-}
 .btn-inverse-primary {
-    @apply bg-indigo-300 text-indigo-950;
+    @apply bg-indigo-300 text-indigo-950 hover:bg-indigo-500 focus:ring-indigo-700 hover:text-white;
 }
 
-.btn-inverse-primary:hover {
-    @apply bg-indigo-500 text-white;
-}
-.btn-inverse-primary {
-    @apply bg-indigo-300 text-indigo-950;
-}
-
-.btn-inverse-danger:hover {
-    @apply bg-red-500 text-white;
-}
 .btn-inverse-danger {
-    @apply bg-red-300 text-red-950;
+    @apply bg-red-300 text-red-950 hover:bg-red-500 focus:ring-indigo-700 hover:text-white;
 }
 
-.btn-inverse-info:hover {
-    @apply bg-blue-500 text-white;
-}
 .btn-inverse-info {
-    @apply bg-blue-300 text-indigo-950;
+    @apply bg-blue-300 text-blue-950 hover:bg-blue-500 focus:ring-blue-700 hover:text-white;
 }
 
-.btn-inverse-info:hover {
-    @apply bg-blue-500 text-white;
-}
-.btn-inverse-success {
-    @apply bg-green-300 text-indigo-950;
+.btn-inverse-dark {
+    @apply bg-gray-300 text-gray-950 hover:bg-gray-500 focus:ring-gray-700 hover:text-white;
 }
 
-.btn-inverse-success:hover {
-    @apply bg-green-500 text-white;
+.badge {
+    @apply text-xs font-medium me-2 px-2.5 py-0.5 rounded-full;
+}
+.badge-success {
+    @apply bg-green-900 text-green-300;
+}
+.badge-warning {
+    @apply bg-yellow-900 text-yellow-300;
+}
+.badge-danger {
+    @apply bg-red-900 text-red-300;
+}
+.badge-primary {
+    @apply bg-indigo-900 text-indigo-300;
 }
 
 .bordered {

@@ -17,7 +17,7 @@
         <nav id="sidebar" class="sidebar">
             <div>
                 <div class="logo-container">
-                    <a href="{{ route('home') }}"><img src="{{ asset('images/taskmaster-logo.jpg') }}" alt="tasmaster-logo"></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('images/taskmaster-logo.jpeg') }}" alt="taskmaster-logo"></a>
 
                     <button id="btn-menu">
                         <i class="fa fa-bars"></i>
@@ -42,14 +42,8 @@
                             <span class="item-description">Tarefas</span>
                         </a>
                     </li>
-                    <li title="Notifications">
-                        <a href="#">
-                            <i class="fa fa-bell"></i>
-                            <span class="item-description">Notifications</span>
-                        </a>
-                    </li>
                     <li title="Profile">
-                        <a href="#">
+                        <a href="{{ route('users.edit', ['user' => auth()->user()->id]) }}">
                             <i class="fa fa-user"></i>
                             <span class="item-description">Profile</span>
                         </a>
@@ -80,19 +74,7 @@
     </main>
     @stack('ajax-requests')
 
-    <script>
-        const btnMenu = document.getElementById('btn-menu');
-        const sidebar = document.getElementById('sidebar');
-        const menu = document.querySelectorAll("#sidebar ul li a");
-
-        btnMenu.addEventListener('click', () => {
-            // sidebar.classList.toggle('-translate-x-full')
-            menu.forEach(i => {
-
-                i.classList.toggle('menu-mobile');
-            });
-            sidebar.classList.toggle('sidebar-mobile')
-        });
-    </script>
+    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2@11.js') }}"></script>
 </body>
 </html>
