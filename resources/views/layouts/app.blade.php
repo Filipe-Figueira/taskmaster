@@ -53,7 +53,7 @@
 
             <aside id="account">
                 <a href="{{ route('users.edit', ['user' => auth()->user()->id]) }}" id="avatar-container">
-                    <img src="{{ asset('storage/'.auth()->user()->avatar ?? 'images/avatar.jpg') }}" alt="avatar" title="{{ auth()->user()->name }}">
+                    <img src="{{ asset('storage/'.auth()->user()->avatar ) }}" alt="avatar" title="{{ auth()->user()->name }}">
                     <span class="item-description">{{ auth()->user()->name }}</span>
                 </a>
                 <form action="{{ route('logout') }}" method="POST">

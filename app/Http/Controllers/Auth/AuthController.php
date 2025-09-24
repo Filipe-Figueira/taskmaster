@@ -37,6 +37,7 @@ class AuthController extends Controller
     {
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
+        $data['avatar'] = 'avatars/avatar.png';
         $user = User::create($data);
         Auth::login($user);
         return redirect()->intended(route('dashboard'));
